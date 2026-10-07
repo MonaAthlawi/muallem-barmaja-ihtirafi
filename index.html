@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>معلم البرمجة للأطفال | تعلم App Inventor من الصفر</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- شريط أدوات القراءة والوضوح -->
+<div class="a11y-bar" id="a11yBar">
+  <div class="a11y-inner">
+    <span class="a11y-title">👁️ خيارات العرض:</span>
+    <div class="a11y-group">
+      <button id="fontDecrease" title="تصغير الخط">أ -</button>
+      <span id="fontSizeLabel">100%</span>
+      <button id="fontIncrease" title="تكبير الخط">أ +</button>
+      <input type="range" id="fontRange" min="80" max="160" value="100" title="حجم الخط">
+    </div>
+    <div class="a11y-group">
+      <button id="boldToggle" title="خط عريض / عادي">غامق: إيقاف</button>
+      <button id="themeToggle" title="ليلي / نهاري">🌙 ليلي</button>
+      <button id="resetA11y" title="إعادة تعيين">↺ إعادة</button>
+    </div>
+  </div>
+</div>
+
+<header class="main-header">
+  <nav class="nav">
+    <div class="logo">🧩 <span>معلم البرمجة</span> <small>App Inventor</small></div>
+    <div class="nav-links" id="navLinks">
+      <a href="#hero">البداية</a>
+      <a href="#journey">الرحلة</a>
+      <a href="#blocks">موسوعة البلوكات</a>
+      <a href="#lab">المختبر</a>
+      <a href="#sim">محاكي الهاتف</a>
+      <a href="#quiz">الاختبار</a>
+      <a href="#output">المخرجات</a>
+    </div>
+    <div class="nav-actions">
+      <div class="progress-mini"><div id="globalProgress"></div></div>
+      <span id="progressText">0%</span>
+      <button class="menu-btn" id="menuBtn">☰</button>
+    </div>
+  </nav>
+</header>
+
+<!-- البطل -->
+<section id="hero" class="hero">
+  <div class="hero-content">
+    <div class="badge">✨ مصمم خصيصاً للطالبات المبتدئات من عمر 8 - 14</div>
+    <h1>تعلّمي البرمجة بالبلوكات<br>مثل لعبة التركيب 🧱</h1>
+    <p class="hero-sub">من الصفر تماماً حتى تصنعي تطبيقك الأول على الهاتف! بدون كتابة أكواد صعبة — فقط ركّبي البلوكات الملوّنة مثل App Inventor الحقيقي.</p>
+    <div class="hero-btns">
+      <a href="#journey" class="btn primary">🚀 ابدئي الرحلة من الصفر</a>
+      <a href="#lab" class="btn secondary">🧪 جرّبي المختبر التفاعلي</a>
+    </div>
+    <div class="hero-stats">
+      <div><strong>9</strong><span>عائلات بلوكات</span></div>
+      <div><strong>35+</strong><span>أمر مشروح</span></div>
+      <div><strong>7</strong><span>خطوات حتى التطبيق</span></div>
+      <div><strong>10</strong><span>أسئلة تفاعلية</span></div>
+    </div>
+  </div>
+  <div class="hero-blocks">
+    <div class="demo-stack">
+      <div class="block b-events">عند الضغط <span class="pill">زر1</span> 📱</div>
+      <div class="block b-control">↳ إذا <span class="pill light">الاسم ≠ فارغ</span> إذن</div>
+      <div class="block b-text">↳↳ اعرض رسالة <span class="pill light">أهلاً + الاسم 🎉</span></div>
+      <div class="block b-logic">↳↳ وإلا اعرض <span class="pill light">اكتبي اسمك أولاً!</span></div>
+      <div class="phone-mini">
+        <div class="pm-notch"></div>
+        <div class="pm-screen"><div id="heroPhoneLabel">أهلاً يا بطلتي! 👋</div><button class="pm-btn" onclick="heroDemo()">جرّبيني ⭐</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ما هو آب انفنتور -->
+<section class="section" id="intro">
+  <h2>🤔 ما هو <span class="hl">App Inventor</span> يا بطلتي؟</h2>
+  <p class="lead">تخيّلي أنك تبنين بيتاً من الليغو — هكذا نبني التطبيقات! موقع مجاني من معهد MIT يتيح لك صناعة تطبيقات أندرويد حقيقية بسحب البلوكات.</p>
+  <div class="cards3">
+    <div class="card">
+      <div class="icon">🎨</div>
+      <h3>1. المصمم Designer</h3>
+      <p>هنا نرسم شكل التطبيق: أزرار، صور، صناديق كتابة، أصوات. مثل ورقة الرسم.</p>
+      <div class="mini-ui"><div class="mu-btn">زر اضغطيني</div><div class="mu-label">نص ترحيب</div><div class="mu-input">مربع كتابة ...</div></div>
+    </div>
+    <div class="card">
+      <div class="icon">🧩</div>
+      <h3>2. البلوكات Blocks</h3>
+      <p>هنا نعلّم التطبيق ماذا يفعل: <b>عند</b> الضغط <b>افعل</b> كذا. مثل إعطاء أوامر لروبوت.</p>
+      <div class="block b-events small">عند الضغط زر1 افعل</div><br>
+      <div class="block b-variables small">عيّن النقاط إلى 0 + 1</div>
+    </div>
+    <div class="card">
+      <div class="icon">📱</div>
+      <h3>3. الهاتف والمعاينة</h3>
+      <p>نجرّب فوراً على الهاتف بتطبيق <b>MIT AI2 Companion</b> أو المحاكي، ثم نصدّر ملف APK.</p>
+      <div class="kbd">المدخلات ← المعالجة ← المخرجات</div>
+    </div>
+  </div>
+  <div class="formula-box">
+    <strong>القاعدة الذهبية للحاسوب:</strong> كل برنامج = <span class="tag t-in">مُدخلات INPUT</span> + <span class="tag t-proc">معالجة PROCESS</span> + <span class="tag t-out">مُخرجات OUTPUT</span>
+    <br><small>مثال: تكتبين اسمك (إدخال) ← التطبيق يضيف "أهلاً" (معالجة) ← يظهر الترحيب على الشاشة (إخراج) 🎉</small>
+  </div>
+</section>
+
+<!-- الرحلة -->
+<section class="section alt" id="journey">
+  <h2>🗺️ رحلتك من الصفر حتى المخرجات</h2>
+  <p class="lead">اتبعي هذه الخطوات السبع بالترتيب، واضغطي "تم ✔" بعد كل خطوة لحفظ تقدمك.</p>
+  <div class="timeline" id="timeline"></div>
+</section>
+
+<!-- موسوعة البلوكات -->
+<section class="section" id="blocks">
+  <h2>📚 موسوعة الأوامر — كل البلوكات المطلوبة</h2>
+  <p class="lead">اضغطي على أي عائلة لونية لتكشفي أوامرها. كل بطاقة فيها: شكل البلوك + معناه + مثال.</p>
+  <div class="tabs" id="tabs"></div>
+  <div class="blocks-grid" id="blocksGrid"></div>
+  <div class="tip-box">💡 <b>كيف تقرئين البلوك؟</b> البلوك الأصفر الغامق دائماً يبدأ بـ <b>«عند»</b> = حدث. البلوكات التي تحته هي الأوامر التي ستنفذ بالترتيب من فوق لتحت.</div>
+</section>
+
+<!-- المختبر -->
+<section class="section alt" id="lab">
+  <h2>🧪 مختبر البلوكات — ركّبي وشاهدي النتيجة</h2>
+  <p class="lead">اضغطي على أي بلوك من اللوحة لإضافته إلى برنامجك، ثم اضغطي <b>تشغيل ▶</b> وشاهدي ماذا سيحدث في سجل المخرجات وشاشة الهاتف.</p>
+  <div class="lab-layout">
+    <div class="palette">
+      <h3>🎨 لوحة البلوكات — اضغطي للإضافة</h3>
+      <div id="palette"></div>
+    </div>
+    <div class="canvas-box">
+      <h3>🧱 برنامجك <button class="btn small danger" id="clearLab">🗑 مسح</button> <button class="btn small primary" id="runLab">▶ تشغيل</button></h3>
+      <ol id="labCanvas" class="lab-canvas"><li class="empty">لوحتك فارغة... أضيفي أول بلوك من اليسار 👈</li></ol>
+      <h4>📋 شرح برنامجك بالعربي:</h4>
+      <div id="labExplain" class="explain">—</div>
+      <h4>🖨️ سجل المخرجات (OUTPUT):</h4>
+      <pre id="labOutput" class="output">في انتظار التشغيل...</pre>
+    </div>
+  </div>
+</section>
+
+<!-- محاكي الهاتف -->
+<section class="section" id="sim">
+  <h2>📱 محاكي الهاتف التفاعلي</h2>
+  <p class="lead">هذا هاتف وهمي داخل الموقع! جرّبي: اكتبي اسمك، اضغطي الزر، غيّري اللون، وشغّلي الصوت.</p>
+  <div class="sim-layout">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <h4 id="simTitle">تطبيقي الأول 🌟</h4>
+        <img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png" alt="avatar" class="sim-avatar" id="simAvatar">
+        <label class="sim-label">اكتبي اسمك:</label>
+        <input id="simName" placeholder="مثال: سارة">
+        <button id="simHello" class="sim-btn">قولِي أهلاً 👋</button>
+        <button id="simColor" class="sim-btn green">غيّري اللون 🎨</button>
+        <button id="simSound" class="sim-btn orange">🔊 صوت تصفيق</button>
+        <div id="simMsg" class="sim-msg">أهلاً بكِ! اكتبي اسمك واضغطي الزر.</div>
+        <div class="sim-score">النقاط: <span id="simScore">0</span> ⭐</div>
+      </div>
+      <div class="phone-home"></div>
+    </div>
+    <div class="sim-explain">
+      <h3>ماذا يحدث خلف الكواليس؟ (البلوكات المكافئة)</h3>
+      <div class="block b-events">عند الضغط زر «قولِي أهلاً»</div>
+      <div class="block b-control">↳ إذا مربع_النص فارغ؟</div>
+      <div class="block b-text">↳↳ اعرض «اكتبي اسمك يا حلوة!» ⚠️</div>
+      <div class="block b-text">↳↳ وإلا اعرض «أهلاً » + الاسم + « 🎉» وزد النقاط 1</div>
+      <div class="block b-events">عند الضغط زر «غيّري اللون»</div>
+      <div class="block b-colors">↳↳ غيّر لون الخلفية عشوائياً</div>
+      <hr>
+      <h4>🎯 مهمة لكِ:</h4>
+      <ol class="mission">
+        <li>اكتبي اسمك واضغطي «قولِي أهلاً» — ماذا ظهر؟</li>
+        <li>اتركي المربع فارغاً واضغطي — ماذا ظهر؟ (هذا هو الشرط if!)</li>
+        <li>اضغطي «غيّري اللون» 3 مرات — لاحظي تغيّر المخرجات.</li>
+        <li>اجمعي 5 نقاط ⭐ لتكوني نجمة التطبيق!</li>
+      </ol>
+      <div id="missionDone" class="success hidden">🎉 ممتاز! أكملتِ المهمة وأصبحتِ مبرمجة! انتقلي للاختبار 👇</div>
+    </div>
+  </div>
+</section>
+
+<!-- اختبار -->
+<section class="section alt" id="quiz">
+  <h2>🏆 الاختبار النهائي — هل أنتِ مبرمجة؟</h2>
+  <p class="lead">10 أسئلة ممتعة. أجيبي واحصلي على شهادتك! 🌟</p>
+  <div class="quiz-box">
+    <div class="quiz-top"><span id="qCount">السؤال 1 / 10</span><div class="qbar"><div id="qBarFill"></div></div><span id="qScore">النقاط: 0</span></div>
+    <h3 id="qText"></h3>
+    <div id="qOpts" class="qopts"></div>
+    <div id="qFeedback" class="feedback"></div>
+    <div class="quiz-btns"><button id="qNext" class="btn primary" disabled>التالي ⬅</button></div>
+    <div id="quizResult" class="hidden"></div>
+  </div>
+</section>
+
+<!-- المخرجات -->
+<section class="section" id="output">
+  <h2>📦 المخرجات: كيف تُخرجين تطبيقك للعالم؟</h2>
+  <div class="cards3">
+    <div class="card"><div class="icon">🔍</div><h3>1. التجربة Companion</h3><p>حمّلي تطبيق <b>MIT AI2 Companion</b> على الهاتف، امسحي رمز QR من موقع App Inventor، وجرّبي لحظياً.</p></div>
+    <div class="card"><div class="icon">💾</div><h3>2. الحفظ .aia</h3><p>من قائمة <b>Projects ← Save</b> تُحفظ نسخة مشروع يمكنك مشاركتها مع معلمتك.</p></div>
+    <div class="card"><div class="icon">📲</div><h3>3. التصدير APK</h3><p>من قائمة <b>Build ← App (APK)</b> تحصلين على ملف تثبيت يعمل على أي أندرويد — هذه هي <b>المُخرجات النهائية!</b></p></div>
+  </div>
+  <div class="cert-box" id="certBox">
+    <h3>🎓 شهادة نجمة البرمجة</h3>
+    <p>اكتبي اسمك لتوليد شهادتك بعد إتمام الرحلة والاختبار:</p>
+    <input id="certName" placeholder="اسمك الجميل هنا...">
+    <button class="btn primary" onclick="genCert()">🎨 توليد الشهادة</button>
+    <canvas id="certCanvas" width="800" height="450"></canvas>
+  </div>
+</section>
+
+<footer>
+  <p>صُنع بحب ❤️ لتعليم الطالبات البرمجة — App Inventor | خط واضح + بلوكات ملونة + تعلم باللعب</p>
+  <p><small>تلميح: استخدمي أزرار أعلى الصفحة لتكبير الخط أو تفعيل الوضع الليلي لراحة عينيك.</small></p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
